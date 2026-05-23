@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://tripcraft-server.onrender.com/api",
+  baseURL: "https://tripcraft-server-gjgn.onrender.com/api",
 });
 
 api.interceptors.request.use((config) => {
