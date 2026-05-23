@@ -69,7 +69,7 @@ export default function ItineraryDetail() {
         {/* DAYS */}
         <div style={{ display: "flex", flexDirection: "column" }}>
           {itinerary.days?.map((day, idx) => (
-            <div key={day.day} className="day-card reveal">
+            <div key={day.day} className="day-card">
               <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: "1.4rem" }}>
                 <div className="day-num">{day.day}</div>
                 <div>
