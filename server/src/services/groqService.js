@@ -2,23 +2,21 @@ const axios = require("axios");
 
 const GROQ_BASE = "https://api.groq.com/openai/v1";
 
-const groqVisionExtract = async (imageUrl) => {
-  const response = await axios.post(
-    `${GROQ_BASE}/chat/completions`,
-    {
-      model: "meta-llama/llama-4-scout-17b-16e-instruct",
-      messages: [
-        {
-          role: "user",
-          content: [
-            {
-              type: "image_url",
-              image_url: { url: imageUrl },
-            },
-            {
-              type: "text",
-              text: `You are a travel document parser. Extract ALL relevant travel information from this document.
-Return ONLY valid JSON with this structure:
+const groqVisionExtract = async (fileUrl) => {
+  // For PDFs, use text model with URL; for images use vision model
+  const isPdf = fileUrl.toLowerCase().includes('.pdf') || fileUrl.toLowerCase().includes('/raw/');
+  
+  if (isPdf) {
+    // Fetch PDF text via a text-based prompt
+    const response = await axios.post(
+      `${GROQ_BASE}/chat/completions`,
+      {
+        model: "llama-3.3-70b-versatile",
+        messages: [
+          {
+            role: "user",
+            content: `A travel document is available at this URL: ${fileUrl}
+Extract travel information and return ONLY valid JSON with this structure:
 {
   "documentType": "flight|hotel|train|bus|car_rental|other",
   "passengerName": "",
@@ -29,15 +27,38 @@ Return ONLY valid JSON with this structure:
   "arrivalDate": "",
   "arrivalTime": "",
   "flightNumber": "",
-  "trainNumber": "",
-  "seatInfo": "",
-  "hotelName": "",
-  "checkIn": "",
-  "checkOut": "",
-  "roomType": "",
   "bookingReference": "",
   "additionalInfo": {}
 }
+Fill only what is present. Use null for missing fields.`,
+          },
+        ],
+        max_tokens: 1024,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response.data.choices[0].message.content;
+  }
+
+  // Image path (original vision model)
+  const response = await axios.post(
+    `${GROQ_BASE}/chat/completions`,
+    {
+      model: "meta-llama/llama-4-scout-17b-16e-instruct",
+      messages: [
+        {
+          role: "user",
+          content: [
+            { type: "image_url", image_url: { url: fileUrl } },
+            {
+              type: "text",
+              text: `Extract ALL travel information. Return ONLY valid JSON with this structure:
+{"documentType":"flight|hotel|train|bus|car_rental|other","passengerName":"","origin":"","destination":"","departureDate":"","departureTime":"","arrivalDate":"","arrivalTime":"","flightNumber":"","bookingReference":"","additionalInfo":{}}
 Fill only what is present. Use null for missing fields.`,
             },
           ],
