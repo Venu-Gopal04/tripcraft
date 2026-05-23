@@ -4,11 +4,6 @@
 
 TripCraft is a full-stack MERN + AI web application that extracts travel information from uploaded flight tickets, hotel bookings, and travel documents using Groq's vision AI, then automatically generates structured, shareable day-by-day itineraries.
 
-![TripCraft Dashboard](https://1drv.ms/i/c/d94772304f95b0d6/IQDtW3Tfxub4SaFkBHh_3_QqAaBccFPOc9HJ7ywtiXlCtxs?e=D5zoKU)
-![New ITINERARY](https://1drv.ms/i/c/d94772304f95b0d6/IQAzpTfBHKT8RYl_yvXEpoRtAR_tzmWhN3I-HkQtubUGVUo?e=SRH7ql)
-![AI](https://1drv.ms/i/c/d94772304f95b0d6/IQCtfY41p15BRIuyR8-nyNfiAcTLpKd_MXjk0gVNj1CrGeU?e=nPqr3B)
-![AI](https://1drv.ms/i/c/d94772304f95b0d6/IQBhaqe_IjcORKvt52t7swepAX9Qv2nLKUxmlIyZFKUjcY4?e=tdccAc)
-![Storage](https://img.shields.io/badge/Storage-Cloudinary-ff2d78?style=for-the-badge)
 
 
 
