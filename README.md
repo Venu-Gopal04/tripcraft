@@ -9,8 +9,8 @@ TripCraft is a full-stack MERN + AI web application that extracts travel informa
 
  Live Demo
 
-- **Frontend:** [Deployed on Vercel]
-- **Backend:** [Deployed on Render]
+https://tripcraft-nu.vercel.app/
+  
 
 
 
@@ -253,8 +253,3 @@ Rendered as day-by-day plan with shareable link
 - GitHub: [@Venu-Gopal04](https://github.com/Venu-Gopal04)
 - Portfolio: [ganjivenugopal-portfolio.netlify.app](https://ganjivenugopal-portfolio.netlify.app)
 
----
-
-## License
-
-MIT License — free to use and modify.
